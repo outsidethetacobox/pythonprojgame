@@ -53,7 +53,7 @@ class player():
 
     # Get the fireLoc from Tyler
     def inputFireLoc(self, fireInputs=[]):
-        for w in range(a.status[0]):
+        for w in range(a.shots):
             # This is a temp for the error/try catch stuff
             err = False
 
@@ -120,32 +120,41 @@ class player():
                 self.trackingGrid[self.fireLoc[a][0]][self.fireLoc[a][1]] = 0
                 object.primaryGrid[self.fireLoc[a][0]][self.fireLoc[a][1]] = 0
 
-    # Update tracking grid of what opponent ships have been sunk
+    # Update player's tracking grid of what opponent ships have been sunk and the opponent's primary grid
     def isSunk(self, object):
+        # The count is to update the how many times the opponent can fire shots
+        count = 0
         if(object.patHp[0] == 0):
             for a in range(2):
                 self.trackingGrid[object.pat[b][0] - 96][object.pat[b][1]] = 2
                 object.primaryGrid[object.pat[b][0] - 96][object.pat[b][1]] = 2
+                count += 1
 
         if(object.desHp[0] == 0):
             for a in range(3):
                 self.trackingGrid[object.des[b][0] - 96][object.des[b][1]] = 2
                 object.primaryGrid[object.des[b][0] - 96][object.des[b][1]] = 2
+                count += 1
 
         if(object.subHp[0] == 0):
             for a in range(3):
                 self.trackingGrid[object.sub[b][0] - 96][object.sub[b][1]] = 2
                 object.primaryGrid[object.sub[b][0] - 96][object.sub[b][1]] = 2
+                count += 1
 
         if(object.batHp[0] == 0):
             for a in range(4):
                 self.trackingGrid[object.bat[b][0] - 96][object.bat[b][1]] = 2
                 object.primaryGrid[object.bat[b][0] - 96][object.bat[b][1]] = 2
+                count += 1
 
         if(object.carHp[0] == 0):
             for a in range(5):
                 self.trackingGrid[object.car[b][0] - 96][object.car[b][1]] = 2
                 object.primaryGrid[object.car[b][0] - 96][object.car[b][1]] = 2
+                count += 1
+        
+        object.shots = count
 
 
     # Get the shipLoc from Shawn for each ship
