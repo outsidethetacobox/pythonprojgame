@@ -154,7 +154,7 @@ class player():
                 object.primaryGrid[object.car[b][0] - 96][object.car[b][1]] = 2
                 count += 1
         
-        object.shots = count
+        object.shots = 5 - count
 
 
     # Get the shipLoc from Shawn for each ship
