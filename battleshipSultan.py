@@ -1,5 +1,8 @@
 class player():
     def __init__(self):
+        # The type of game played and is set along with the ships at beginning of game (0 = classic, 1 = Salvo) 
+        self.gameType = None
+
         # None = num of shots player can fire
         self.shots = None
 
@@ -154,11 +157,12 @@ class player():
                 object.primaryGrid[object.car[b][0] - 96][object.car[b][1]] = 2
                 count += 1
         
-        object.shots = 5 - count
+        if (sefl.gameType == 1):
+            object.shots = 5 - count
 
 
-    # Get the shipLoc from Shawn for each ship
-    def setShips(self, p = [], d = [], su = [], b = [], c = []):
+    # Get the gameMode/gameType and the shipLoc from Shawn for each ship
+    def setShips(self, gameMode = 0, p = [], d = [], su = [], b = [], c = []):
         for w in range(2):
             # string of XY for patrol boat
             x,y = self.translate(p[w])
@@ -183,6 +187,13 @@ class player():
             # string of XY for carrier
             x,y = self.translate(c[w])
             self.car[w] = [x,y]
+
+        if (gameMode == 0):
+            self.shots = 1
+            self.gameType = 0
+        else:
+            self.shots = 5
+            self.gameType = 1
             
 
 # Testing dictionary possibilty, ignore it...
