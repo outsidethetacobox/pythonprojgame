@@ -2,6 +2,7 @@ import pygame
 import Package_Battleship.text as txt
 import gameboard
 import Battle_menu
+import completeReq
 
 class player():
     def __init__(self):
@@ -44,7 +45,7 @@ class player():
             if(n <= 10):
                 x = n
                 y = 1
-            else
+            else:
                 x = int(n / 10)
                 y = n % 10
                 if (y == 0):
@@ -69,6 +70,7 @@ class player():
 
         # This is the error/try catch stuff, finish it later
         if (err == True):
+            pass
         # print("Invalid input. Try again.")
 
 
@@ -175,7 +177,7 @@ class player():
                 object.primaryGrid[object.car[b][0] - 96][object.car[b][1]] = 2
                 count += 1
         
-        if (sefl.gameType == 1):
+        if (self.gameType == 1):
             object.shots = 5 - count
 
 
@@ -212,14 +214,3 @@ class player():
         else:
             self.shots = 5
             self.gameType = 1
-            
-
-# Testing dictionary possibilty, ignore it...
-"""
-dictionary = {"Carrier": car, "Battleship": bat,
-              "Submarine": sub, "Destroyer": des, "Patrol": pat}
-
-print the entire dict:
-for x, y in dictionary.items():
-    print(x, y)
-"""
