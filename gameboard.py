@@ -1,6 +1,7 @@
 import pygame
 import Package_Battleship.text as txt
-#from Package_Battleship.gameover import gameover as gova REMOVE COMMENT
+import battleshipSultan
+# from Package_Battleship.gameover import gameover as gova REMOVE COMMENT
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -115,118 +116,110 @@ ntyeight_button = pygame.Rect(505, 425, 60, 40)
 ntynine_button = pygame.Rect(570, 425, 60, 40)
 onehunny_button = pygame.Rect(635, 425, 60, 40)
 
-
 # text , rect , color, hover color, hit_color, miss_color x, h, y, w, spot number, action
 buttons = [
     [txt.one, one_button, blue, violet_blue, green, red, 50, 20, 60, 40, '1'],
-    [txt.two, two_button, blue, violet_blue, green, red,  115, 20, 60, 40, '2'],
-    [txt.three, three_button, blue, violet_blue, green, red,  180, 20, 60, 40, '3'],
-    [txt.four, four_button, blue, violet_blue, green, red,  245, 20, 60, 40, '4'],
-    [txt.five, five_button, blue, violet_blue, green, red,  310, 20, 60, 40, '5'],
-    [txt.six, six_button, blue, violet_blue, green, red,  375, 20, 60, 40, '6'],
-    [txt.seven, seven_button, blue, violet_blue, green, red,  440, 20, 60, 40, '7'],
-    [txt.eight, eight_button, blue, violet_blue, green, red,  505, 20, 60, 40, '8'],
-    [txt.nine, nine_button, blue, violet_blue, green, red,  570, 20, 60, 40, '9'],
-    [txt.ten, ten_button, blue, violet_blue, green, red,  635, 20, 60, 40, '10'],
-    [txt.tone, eleven_button, blue, violet_blue, green, red,  50, 65, 60, 40, '11'],
-    [txt.ttwo, twelve_button, blue, violet_blue, green, red,  115, 65, 60, 40, '12'],
-    [txt.tthree, thirteen_button, blue, violet_blue, green, red,  180, 65, 60, 40, '13'],
-    [txt.tfour, fourteen_button, blue, violet_blue, green, red,  245, 65, 60, 40, '14'],
-    [txt.tfive, fiveteen_button, blue, violet_blue, green, red,  310, 65, 60, 40, '15'],
-    [txt.tsix, sixteen_button, blue, violet_blue, green, red,  375, 65, 60, 40, '16'],
-    [txt.tseven, seventeen_button, blue, violet_blue, green, red,  440, 65, 60, 40, '17'],
-    [txt.teight, eightteen_button, blue, violet_blue, green, red,  505, 65, 60, 40, '18'],
-    [txt.tnine, nineteen_button, blue, violet_blue, green, red,  570, 65, 60, 40, '19'],
-    [txt.tw, twenty_button, blue, violet_blue, green, red,  635, 65, 60, 40, '20'],
-    [txt.twone, twone_button, blue, violet_blue, green, red,  50, 110, 60, 40, '21'],
-    [txt.twtwo, twtwo_button, blue, violet_blue, green, red,  115, 110, 60, 40, '22'],
+    [txt.two, two_button, blue, violet_blue, green, red, 115, 20, 60, 40, '2'],
+    [txt.three, three_button, blue, violet_blue, green, red, 180, 20, 60, 40, '3'],
+    [txt.four, four_button, blue, violet_blue, green, red, 245, 20, 60, 40, '4'],
+    [txt.five, five_button, blue, violet_blue, green, red, 310, 20, 60, 40, '5'],
+    [txt.six, six_button, blue, violet_blue, green, red, 375, 20, 60, 40, '6'],
+    [txt.seven, seven_button, blue, violet_blue, green, red, 440, 20, 60, 40, '7'],
+    [txt.eight, eight_button, blue, violet_blue, green, red, 505, 20, 60, 40, '8'],
+    [txt.nine, nine_button, blue, violet_blue, green, red, 570, 20, 60, 40, '9'],
+    [txt.ten, ten_button, blue, violet_blue, green, red, 635, 20, 60, 40, '10'],
+    [txt.tone, eleven_button, blue, violet_blue, green, red, 50, 65, 60, 40, '11'],
+    [txt.ttwo, twelve_button, blue, violet_blue, green, red, 115, 65, 60, 40, '12'],
+    [txt.tthree, thirteen_button, blue, violet_blue, green, red, 180, 65, 60, 40, '13'],
+    [txt.tfour, fourteen_button, blue, violet_blue, green, red, 245, 65, 60, 40, '14'],
+    [txt.tfive, fiveteen_button, blue, violet_blue, green, red, 310, 65, 60, 40, '15'],
+    [txt.tsix, sixteen_button, blue, violet_blue, green, red, 375, 65, 60, 40, '16'],
+    [txt.tseven, seventeen_button, blue, violet_blue, green, red, 440, 65, 60, 40, '17'],
+    [txt.teight, eightteen_button, blue, violet_blue, green, red, 505, 65, 60, 40, '18'],
+    [txt.tnine, nineteen_button, blue, violet_blue, green, red, 570, 65, 60, 40, '19'],
+    [txt.tw, twenty_button, blue, violet_blue, green, red, 635, 65, 60, 40, '20'],
+    [txt.twone, twone_button, blue, violet_blue, green, red, 50, 110, 60, 40, '21'],
+    [txt.twtwo, twtwo_button, blue, violet_blue, green, red, 115, 110, 60, 40, '22'],
     [txt.twthree, twthree_button, blue, violet_blue, green, red, 180, 110, 60, 40, '23'],
-    [txt.twfour, twfour_button, blue, violet_blue, green, red,  245, 110, 60, 40, '24'],
-    [txt.twfive, twfive_button, blue, violet_blue, green, red,  310, 110, 60, 40, '25'],
-    [txt.twsix, twsix_button, blue, violet_blue, green, red,  375, 110, 60, 40, '26'],
-    [txt.twseven, twseven_button, blue, violet_blue, green, red,  440, 110, 60, 40, '27'],
-    [txt.tweight, tweight_button, blue, violet_blue, green, red,  505, 110, 60, 40, '28'],
-    [txt.twnine, twnine_button, blue, violet_blue, green, red,  570, 110, 60, 40, '29'],
-    [txt.tty, tty_button, blue, violet_blue, green, red,  635, 110, 60, 40, '30'],
-    [txt.ttyone, ttyone_button, blue, violet_blue, green, red,  50, 155, 60, 40, '31'],
-    [txt.ttytwo, ttytwo_button, blue, violet_blue, green, red,  115, 155, 60, 40, '32'],
-    [txt.ttythree, ttythree_button, blue, violet_blue, green, red,  180, 155, 60, 40, '33'],
-    [txt.ttyfour, ttyfour_button, blue, violet_blue, green, red,  245, 155, 60, 40, '34'],
-    [txt.ttyfive, ttyfive_button, blue, violet_blue, green, red,  310, 155, 60, 40, '35'],
-    [txt.ttysix, ttysix_button, blue, violet_blue, green, red,  375, 155, 60, 40, '36'],
-    [txt.ttyseven, ttyseven_button, blue, violet_blue, green, red,  440, 155, 60, 40, '37'],
-    [txt.ttyeight, ttyeight_button, blue, violet_blue, green, red,  505, 155, 60, 40, '38'],
-    [txt.ttynine, ttynine_button, blue, violet_blue, green, red,  570, 155, 60, 40, '39'],
-    [txt.fty, ft_button, blue, violet_blue, green, red,  635, 155, 60, 40, '40'],
-    [txt.ftyone, ftone_button, blue, violet_blue, green, red,  50, 200, 60, 40, '41'],
-    [txt.ftytwo, fttwo_button, blue, violet_blue, green, red,  115, 200, 60, 40, '42'],
-    [txt.ftythree, ftthree_button, blue, violet_blue, green, red,  180, 200, 60, 40, '43'],
-    [txt.ftyfour, ftfour_button, blue, violet_blue, green, red,  245, 200, 60, 40, '44'],
-    [txt.ftyfive, ftfive_button, blue, violet_blue, green, red,  310, 200, 60, 40, '45'],
-    [txt.ftysix, ftsix_button, blue, violet_blue, green, red,  375, 200, 60, 40, '46'],
-    [txt.ftyseven, ftseven_button, blue, violet_blue, green, red,  440, 200, 60, 40, '47'],
-    [txt.ftyeight, fteight_button, blue, violet_blue, green, red,  505, 200, 60, 40, '48'],
-    [txt.ftynine, ftnine_button, blue, violet_blue, green, red,  570, 200, 60, 40, '49'],
-    [txt.fv, fv_button, blue, violet_blue, green, red,  635, 200, 60, 40, '50'],
-    [txt.fvone, fvone_button, blue, violet_blue, green, red,  50, 245, 60, 40, '51'],
-    [txt.fvtwo, fvtwo_button, blue, violet_blue, green, red,  115, 245, 60, 40, '52'],
-    [txt.fvthree, fvthree_button, blue, violet_blue, green, red,  180, 245, 60, 40, '53'],
-    [txt.fvfour, fvfour_button, blue, violet_blue, green, red,  245, 245, 60, 40, '54'],
-    [txt.fvfive, fvfive_button, blue, violet_blue, green, red,  310, 245, 60, 40, '55'],
-    [txt.fvsix, fvsix_button, blue, violet_blue, green, red,  375, 245, 60, 40, '56'],
-    [txt.fvseven, fvseven_button, blue, violet_blue, green, red,  440, 245, 60, 40, '57'],
-    [txt.fveight, fveight_button, blue, violet_blue, green, red,  505, 245, 60, 40, '58'],
-    [txt.fvnine, fvnine_button, blue, violet_blue, green, red,  570, 245, 60, 40, '59'],
-    [txt.sxy, sx_button, blue, violet_blue, green, red,  635, 245, 60, 40, '60'],
-    [txt.sxyone, sxone_button, blue, violet_blue, green, red,  50, 290, 60, 40, '61'],
-    [txt.sxytwo, sxtwo_button, blue, violet_blue, green, red,  115, 290, 60, 40, '62'],
-    [txt.sxythree, sxthree_button, blue, violet_blue, green, red,  180, 290, 60, 40, '63'],
-    [txt.sxyfour, sxfour_button, blue, violet_blue, green, red,  245, 290, 60, 40, '64'],
-    [txt.sxyfive, sxfive_button, blue, violet_blue, green, red,  310, 290, 60, 40, '65'],
-    [txt.sxysix, sxsix_button, blue, violet_blue, green, red,  375, 290, 60, 40, '66'],
-    [txt.sxyseven, sxseven_button, blue, violet_blue, green, red,  440, 290, 60, 40, '67'],
-    [txt.sxyeight, sxeight_button, blue, violet_blue, green, red,  505, 290, 60, 40, '68'],
-    [txt.sxynine, sxnine_button, blue, violet_blue, green, red,  570, 290, 60, 40, '69'],
-    [txt.svn, svn_button, blue, violet_blue, green, red,  635, 290, 60, 40, '70'],
-    [txt.svnone, svnone_button, blue, violet_blue, green, red,  50, 335, 60, 40, '71'],
-    [txt.svntwo, svntwo_button, blue, violet_blue, green, red,  115, 335, 60, 40, '72'],
-    [txt.svnthree, svnthree_button, blue, violet_blue, green, red,  180, 335, 60, 40, '73'],
-    [txt.svnfour, svnfour_button, blue, violet_blue, green, red,  245, 335, 60, 40, '74'],
-    [txt.svnfive, svnfive_button, blue, violet_blue, green, red,  310, 335, 60, 40, '75'],
-    [txt.svnsix, svnsix_button, blue, violet_blue, green, red,  375, 335, 60, 40, '76'],
-    [txt.svnseven, svnseven_button, blue, violet_blue, green, red,  440, 335, 60, 40, '77'],
-    [txt.svneight, svneight_button, blue, violet_blue, green, red,  505, 335, 60, 40, '78'],
-    [txt.svnnine, svnnine_button, blue, violet_blue, green, red,  570, 335, 60, 40, '79'],
-    [txt.egt, ety_button, blue, violet_blue, green, red,  635, 335, 60, 40, '80'],
-    [txt.egtone, etyone_button, blue, violet_blue, green, red,  50, 380, 60, 40, '81'],
-    [txt.egttwo, etytwo_button, blue, violet_blue, green, red,  115, 380, 60, 40, '82'],
-    [txt.egtthree, etythree_button, blue, violet_blue, green, red,  180, 380, 60, 40, '83'],
-    [txt.egtfour, etyfour_button, blue, violet_blue, green, red,  245, 380, 60, 40, '84'],
-    [txt.egtfive, etyfive_button, blue, violet_blue, green, red,  310, 380, 60, 40, '85'],
-    [txt.egtsix, etysix_button, blue, violet_blue, green, red,  375, 380, 60, 40, '86'],
-    [txt.egtseven, etyseven_button, blue, violet_blue, green, red,  440, 380, 60, 40, '87'],
-    [txt.egteight, etyeight_button, blue, violet_blue, green, red,  505, 380, 60, 40, '88'],
-    [txt.egtnine, etynine_button, blue, violet_blue, green, red,  570, 380, 60, 40, '89'],
-    [txt.nin, nty_button, blue, violet_blue, green, red,  635, 380, 60, 40, '90'],
-    [txt.ninone, ntyone_button, blue, violet_blue, green, red,  50, 425, 60, 40, '91'],
-    [txt.nintwo, ntytwo_button, blue, violet_blue, green, red,  115, 425, 60, 40, '92'],
-    [txt.ninthree, ntythree_button, blue, violet_blue, green, red,  180, 425, 60, 40, '93'],
-    [txt.ninfour, ntyfour_button, blue, violet_blue, green, red,  245, 425, 60, 40, '94'],
-    [txt.ninfive, ntyfive_button, blue, violet_blue, green, red,  310, 425, 60, 40, '95'],
-    [txt.ninsix, ntysix_button, blue, violet_blue, green, red,  375, 425, 60, 40, '96'],
-    [txt.ninseven, ntyseven_button, blue, violet_blue, green, red,  440, 425, 60, 40, '97'],
-    [txt.nineight, ntyeight_button, blue, violet_blue, green, red,  505, 425, 60, 40, '98'],
-    [txt.ninnine, ntynine_button, blue, violet_blue, green, red,  570, 425, 60, 40, '99'],
-    [txt.hunny, onehunny_button, blue, violet_blue, green, red,  635, 425, 60, 40, '100'],
-
-
-
+    [txt.twfour, twfour_button, blue, violet_blue, green, red, 245, 110, 60, 40, '24'],
+    [txt.twfive, twfive_button, blue, violet_blue, green, red, 310, 110, 60, 40, '25'],
+    [txt.twsix, twsix_button, blue, violet_blue, green, red, 375, 110, 60, 40, '26'],
+    [txt.twseven, twseven_button, blue, violet_blue, green, red, 440, 110, 60, 40, '27'],
+    [txt.tweight, tweight_button, blue, violet_blue, green, red, 505, 110, 60, 40, '28'],
+    [txt.twnine, twnine_button, blue, violet_blue, green, red, 570, 110, 60, 40, '29'],
+    [txt.tty, tty_button, blue, violet_blue, green, red, 635, 110, 60, 40, '30'],
+    [txt.ttyone, ttyone_button, blue, violet_blue, green, red, 50, 155, 60, 40, '31'],
+    [txt.ttytwo, ttytwo_button, blue, violet_blue, green, red, 115, 155, 60, 40, '32'],
+    [txt.ttythree, ttythree_button, blue, violet_blue, green, red, 180, 155, 60, 40, '33'],
+    [txt.ttyfour, ttyfour_button, blue, violet_blue, green, red, 245, 155, 60, 40, '34'],
+    [txt.ttyfive, ttyfive_button, blue, violet_blue, green, red, 310, 155, 60, 40, '35'],
+    [txt.ttysix, ttysix_button, blue, violet_blue, green, red, 375, 155, 60, 40, '36'],
+    [txt.ttyseven, ttyseven_button, blue, violet_blue, green, red, 440, 155, 60, 40, '37'],
+    [txt.ttyeight, ttyeight_button, blue, violet_blue, green, red, 505, 155, 60, 40, '38'],
+    [txt.ttynine, ttynine_button, blue, violet_blue, green, red, 570, 155, 60, 40, '39'],
+    [txt.fty, ft_button, blue, violet_blue, green, red, 635, 155, 60, 40, '40'],
+    [txt.ftyone, ftone_button, blue, violet_blue, green, red, 50, 200, 60, 40, '41'],
+    [txt.ftytwo, fttwo_button, blue, violet_blue, green, red, 115, 200, 60, 40, '42'],
+    [txt.ftythree, ftthree_button, blue, violet_blue, green, red, 180, 200, 60, 40, '43'],
+    [txt.ftyfour, ftfour_button, blue, violet_blue, green, red, 245, 200, 60, 40, '44'],
+    [txt.ftyfive, ftfive_button, blue, violet_blue, green, red, 310, 200, 60, 40, '45'],
+    [txt.ftysix, ftsix_button, blue, violet_blue, green, red, 375, 200, 60, 40, '46'],
+    [txt.ftyseven, ftseven_button, blue, violet_blue, green, red, 440, 200, 60, 40, '47'],
+    [txt.ftyeight, fteight_button, blue, violet_blue, green, red, 505, 200, 60, 40, '48'],
+    [txt.ftynine, ftnine_button, blue, violet_blue, green, red, 570, 200, 60, 40, '49'],
+    [txt.fv, fv_button, blue, violet_blue, green, red, 635, 200, 60, 40, '50'],
+    [txt.fvone, fvone_button, blue, violet_blue, green, red, 50, 245, 60, 40, '51'],
+    [txt.fvtwo, fvtwo_button, blue, violet_blue, green, red, 115, 245, 60, 40, '52'],
+    [txt.fvthree, fvthree_button, blue, violet_blue, green, red, 180, 245, 60, 40, '53'],
+    [txt.fvfour, fvfour_button, blue, violet_blue, green, red, 245, 245, 60, 40, '54'],
+    [txt.fvfive, fvfive_button, blue, violet_blue, green, red, 310, 245, 60, 40, '55'],
+    [txt.fvsix, fvsix_button, blue, violet_blue, green, red, 375, 245, 60, 40, '56'],
+    [txt.fvseven, fvseven_button, blue, violet_blue, green, red, 440, 245, 60, 40, '57'],
+    [txt.fveight, fveight_button, blue, violet_blue, green, red, 505, 245, 60, 40, '58'],
+    [txt.fvnine, fvnine_button, blue, violet_blue, green, red, 570, 245, 60, 40, '59'],
+    [txt.sxy, sx_button, blue, violet_blue, green, red, 635, 245, 60, 40, '60'],
+    [txt.sxyone, sxone_button, blue, violet_blue, green, red, 50, 290, 60, 40, '61'],
+    [txt.sxytwo, sxtwo_button, blue, violet_blue, green, red, 115, 290, 60, 40, '62'],
+    [txt.sxythree, sxthree_button, blue, violet_blue, green, red, 180, 290, 60, 40, '63'],
+    [txt.sxyfour, sxfour_button, blue, violet_blue, green, red, 245, 290, 60, 40, '64'],
+    [txt.sxyfive, sxfive_button, blue, violet_blue, green, red, 310, 290, 60, 40, '65'],
+    [txt.sxysix, sxsix_button, blue, violet_blue, green, red, 375, 290, 60, 40, '66'],
+    [txt.sxyseven, sxseven_button, blue, violet_blue, green, red, 440, 290, 60, 40, '67'],
+    [txt.sxyeight, sxeight_button, blue, violet_blue, green, red, 505, 290, 60, 40, '68'],
+    [txt.sxynine, sxnine_button, blue, violet_blue, green, red, 570, 290, 60, 40, '69'],
+    [txt.svn, svn_button, blue, violet_blue, green, red, 635, 290, 60, 40, '70'],
+    [txt.svnone, svnone_button, blue, violet_blue, green, red, 50, 335, 60, 40, '71'],
+    [txt.svntwo, svntwo_button, blue, violet_blue, green, red, 115, 335, 60, 40, '72'],
+    [txt.svnthree, svnthree_button, blue, violet_blue, green, red, 180, 335, 60, 40, '73'],
+    [txt.svnfour, svnfour_button, blue, violet_blue, green, red, 245, 335, 60, 40, '74'],
+    [txt.svnfive, svnfive_button, blue, violet_blue, green, red, 310, 335, 60, 40, '75'],
+    [txt.svnsix, svnsix_button, blue, violet_blue, green, red, 375, 335, 60, 40, '76'],
+    [txt.svnseven, svnseven_button, blue, violet_blue, green, red, 440, 335, 60, 40, '77'],
+    [txt.svneight, svneight_button, blue, violet_blue, green, red, 505, 335, 60, 40, '78'],
+    [txt.svnnine, svnnine_button, blue, violet_blue, green, red, 570, 335, 60, 40, '79'],
+    [txt.egt, ety_button, blue, violet_blue, green, red, 635, 335, 60, 40, '80'],
+    [txt.egtone, etyone_button, blue, violet_blue, green, red, 50, 380, 60, 40, '81'],
+    [txt.egttwo, etytwo_button, blue, violet_blue, green, red, 115, 380, 60, 40, '82'],
+    [txt.egtthree, etythree_button, blue, violet_blue, green, red, 180, 380, 60, 40, '83'],
+    [txt.egtfour, etyfour_button, blue, violet_blue, green, red, 245, 380, 60, 40, '84'],
+    [txt.egtfive, etyfive_button, blue, violet_blue, green, red, 310, 380, 60, 40, '85'],
+    [txt.egtsix, etysix_button, blue, violet_blue, green, red, 375, 380, 60, 40, '86'],
+    [txt.egtseven, etyseven_button, blue, violet_blue, green, red, 440, 380, 60, 40, '87'],
+    [txt.egteight, etyeight_button, blue, violet_blue, green, red, 505, 380, 60, 40, '88'],
+    [txt.egtnine, etynine_button, blue, violet_blue, green, red, 570, 380, 60, 40, '89'],
+    [txt.nin, nty_button, blue, violet_blue, green, red, 635, 380, 60, 40, '90'],
+    [txt.ninone, ntyone_button, blue, violet_blue, green, red, 50, 425, 60, 40, '91'],
+    [txt.nintwo, ntytwo_button, blue, violet_blue, green, red, 115, 425, 60, 40, '92'],
+    [txt.ninthree, ntythree_button, blue, violet_blue, green, red, 180, 425, 60, 40, '93'],
+    [txt.ninfour, ntyfour_button, blue, violet_blue, green, red, 245, 425, 60, 40, '94'],
+    [txt.ninfive, ntyfive_button, blue, violet_blue, green, red, 310, 425, 60, 40, '95'],
+    [txt.ninsix, ntysix_button, blue, violet_blue, green, red, 375, 425, 60, 40, '96'],
+    [txt.ninseven, ntyseven_button, blue, violet_blue, green, red, 440, 425, 60, 40, '97'],
+    [txt.nineight, ntyeight_button, blue, violet_blue, green, red, 505, 425, 60, 40, '98'],
+    [txt.ninnine, ntynine_button, blue, violet_blue, green, red, 570, 425, 60, 40, '99'],
+    [txt.hunny, onehunny_button, blue, violet_blue, green, red, 635, 425, 60, 40, '100'],
 
 ]
-
-
-
-
 
 
 def text_objects(text, font):
@@ -245,8 +238,8 @@ def button_hover(button_x, button_w, button_y, button_h, disply, color, rect, te
         while click[0] == 1:
             mouse_click = False
             return spot_num
-            #load_battleship()
-            #action()
+            # load_battleship()
+            # action()
     else:
         pygame.draw.rect(disply, color, rect)
         Display.blit(text, rect)
@@ -259,7 +252,7 @@ def gameon():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gaming = False
-               # gova() REMOVE comment
+            # gova() REMOVE comment
         textsurf, textrect = text_objects("comp output bar", F)
         textrect.center = (400, 600)
         Display.blit(textsurf, textrect)
@@ -270,15 +263,14 @@ def gameon():
         pygame.display.flip()
 
 
-
-def ship_placement(gameMode = None):
+def ship_placement(gameMode=None):
     # if game mode is classic, gameMode = 0
     # if salvo gameMode = 1
 
-    pat = [None] * 2 # patrol
-    des = [None] * 3 # destroyer
-    sub = [None] * 3 # submarine
-    bat = [None] * 4 # battleship
+    pat = [None] * 2  # patrol
+    des = [None] * 3  # destroyer
+    sub = [None] * 3  # submarine
+    bat = [None] * 4  # battleship
     car = [None] * 5
 
     gaming = True
@@ -287,7 +279,7 @@ def ship_placement(gameMode = None):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gaming = False
-               # gova() REMOVE comment
+            # gova() REMOVE comment
         textsurf, textrect = text_objects("comp output bar", F)
         textrect.center = (400, 600)
         Display.blit(textsurf, textrect)
@@ -296,13 +288,13 @@ def ship_placement(gameMode = None):
             value = button_hover(B_x, B_h, B_y, B_w, Display, color, rect, text, hover, hit, miss, spot)
             if value != None:
                 if pat[0] == None:
-                   pat[0] = value
-                   print("patrol [1] is at " + str(value))
-                   clock.tick(0.)
+                    pat[0] = value
+                    print("patrol [1] is at " + str(value))
+                    clock.tick(0.)
                 elif pat[1] == None:
-                   pat[1] = value
-                   print("patrol [2]  is at " + str(value))
-                   clock.tick(0.5)
+                    pat[1] = value
+                    print("patrol [2]  is at " + str(value))
+                    clock.tick(0.5)
                 elif des[0] == None:
                     des[0] = value
                     print("destroyer [1] is at " + str(value))
@@ -366,25 +358,16 @@ def ship_placement(gameMode = None):
                 else:
                     None
 
-
-
-
-
-
-
-
         pygame.display.update()
         pygame.display.flip()
-    a = player()
-    
-    set_ships(0, pat, des, sub, bat, car)
 
+    a = battleshipSultan.player()
 
+    a.setShips(0, pat, des, sub, bat, car)
 
 
 # REMOVE THIS WHEN DONE TESTING
 ship_placement()
-
 
 """
 patrol = 2
