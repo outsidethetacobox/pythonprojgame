@@ -116,7 +116,7 @@ ntynine_button = pygame.Rect(570, 425, 60, 40)
 onehunny_button = pygame.Rect(635, 425, 60, 40)
 
 
-# text , rect , color, hover color, hit_color, miss_color x, h, y, w, action, spot_number
+# text , rect , color, hover color, hit_color, miss_color x, h, y, w, spot number, action
 buttons = [
     [txt.one, one_button, blue, violet_blue, green, red, 50, 20, 60, 40, '1'],
     [txt.two, two_button, blue, violet_blue, green, red,  115, 20, 60, 40, '2'],
@@ -235,24 +235,22 @@ def text_objects(text, font):
 
 
 def button_hover(button_x, button_w, button_y, button_h, disply, color, rect, text, hover_color,
-                 hit_color, miss_color, action=None):
+                 hit_color, miss_color, spot_num, action=None):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
+
     if button_x + button_w > mouse[0] > button_x and button_y + (button_h / 2) > mouse[1] > button_y:
         pygame.draw.rect(disply, hover_color, rect)
         Display.blit(text, rect)
-        if click[0] == 1:
-            load_battleship()
-            action()
+        while click[0] == 1:
+            mouse_click = False
+            return spot_num
+            #load_battleship()
+            #action()
     else:
         pygame.draw.rect(disply, color, rect)
         Display.blit(text, rect)
 
-
-def ship_placement(gameMode):
-    None
-    # if game mode is classic, gameMode = 0
-    # if salvo gameMode = 1
 
 def gameon():
     gaming = True
@@ -273,6 +271,125 @@ def gameon():
 
 
 
+def ship_placement(gameMode = None):
+    # if game mode is classic, gameMode = 0
+    # if salvo gameMode = 1
+
+    pat = [None] * 2 # patrol
+    des = [None] * 3 # destroyer
+    sub = [None] * 3 # submarine
+    bat = [None] * 4 # battleship
+    car = [None] * 5
+
+    gaming = True
+    Display.fill(black)
+    while gaming:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                gaming = False
+               # gova() REMOVE comment
+        textsurf, textrect = text_objects("comp output bar", F)
+        textrect.center = (400, 600)
+        Display.blit(textsurf, textrect)
+
+        for text, rect, color, hover, hit, miss, B_x, B_y, B_w, B_h, spot in buttons:
+            value = button_hover(B_x, B_h, B_y, B_w, Display, color, rect, text, hover, hit, miss, spot)
+            if value != None:
+                if pat[0] == None:
+                   pat[0] = value
+                   print("patrol [1] is at " + str(value))
+                   clock.tick(0.)
+                elif pat[1] == None:
+                   pat[1] = value
+                   print("patrol [2]  is at " + str(value))
+                   clock.tick(0.5)
+                elif des[0] == None:
+                    des[0] = value
+                    print("destroyer [1] is at " + str(value))
+                    clock.tick(2)
+                elif des[1] == None:
+                    des[1] = value
+                    print("destroyer [2] is at " + str(value))
+                    clock.tick(2)
+                elif des[2] == None:
+                    des[2] = value
+                    print("destroyer [3] is at " + str(value))
+                    clock.tick(1)
+                elif sub[0] == None:
+                    sub[0] = value
+                    print("submarine [1] is at " + str(value))
+                    clock.tick(1)
+                elif sub[1] == None:
+                    sub[1] = value
+                    print("submarine [2] is at " + str(value))
+                    clock.tick(1)
+                elif sub[2] == None:
+                    sub[2] = value
+                    print("submarine [3] is at " + str(value))
+                    clock.tick(1)
+                elif bat[0] == None:
+                    bat[0] = value
+                    print("battleship [1] is at " + str(value))
+                    clock.tick(1)
+                elif bat[1] == 0:
+                    bat[1] = value
+                    print("battleship [2] is at " + str(value))
+                    clock.tick(1)
+                elif bat[2] == None:
+                    bat[2] = value
+                    print("battleship [3] is at " + str(value))
+                    clock.tick(1)
+                elif bat[3] == None:
+                    bat[3] = value
+                    print("battleship [4] is at " + str(value))
+                    clock.tick(1)
+                elif car[0] == None:
+                    car[0] = value
+                    print("carrier [1] is at " + str(value))
+                    clock.tick(1)
+                elif car[1] == None:
+                    car[1] = value
+                    print("carrier [2] is at " + str(value))
+                    clock.tick(1)
+                elif car[2] == None:
+                    car[2] = value
+                    print("carrier [3] is at " + str(value))
+                    clock.tick(1)
+                elif car[3] == None:
+                    car[3] = value
+                    print("carrier [4] is at " + str(value))
+                    clock.tick(1)
+                elif car[4] == None:
+                    car[4] = value
+                    print("carrier [5] is at " + str(value))
+                    clock.tick(1)
+                else:
+                    None
+
+
+
+
+
+
+
+
+        pygame.display.update()
+        pygame.display.flip()
+    a = player()
+    
+    set_ships(0, pat, des, sub, bat, car)
+
+
+
 
 # REMOVE THIS WHEN DONE TESTING
-gameon()
+ship_placement()
+
+
+"""
+patrol = 2
+destroyer = 3
+submarine = 3
+battleship = 4
+carrier =  5
+"""
