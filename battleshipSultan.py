@@ -32,7 +32,20 @@ class player():
     def translate(self, s):
         s = s.strip()
         s = s.lower()
-        if (2 <= len(s) <= 3):
+
+        # If the input string is a number 1 to 100
+        n = int(s)
+        if (1 <= n <= 100):        
+            if(n <= 10):
+                x = n
+                y = 1
+            else
+                x = int(n / 10)
+                y = n % 10
+                if (y == 0):
+                    y = 10
+            return x, y
+        elif (2 <= len(s) <= 3):
             if (len(s) == 3):
                 y = int(s[1]+s[2])
             else:
