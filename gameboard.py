@@ -235,14 +235,13 @@ def button_hover(button_x, button_w, button_y, button_h, disply, color, rect, te
     if button_x + button_w > mouse[0] > button_x and button_y + (button_h / 2) > mouse[1] > button_y:
         pygame.draw.rect(disply, hover_color, rect)
         Display.blit(text, rect)
-        while click[0] == 1:
-            mouse_click = False
+        if click[0] == 1:
+            pygame.time.wait(200)
             return spot_num
-            # load_battleship()
-            # action()
     else:
         pygame.draw.rect(disply, color, rect)
         Display.blit(text, rect)
+
 
 
 def gameon():
@@ -290,11 +289,12 @@ def ship_placement(gameMode=None):
                 if pat[0] == None:
                     pat[0] = value
                     print("patrol [1] is at " + str(value))
-                    clock.tick(0.)
+                    clock.tick(2)
+
                 elif pat[1] == None:
                     pat[1] = value
                     print("patrol [2]  is at " + str(value))
-                    clock.tick(0.5)
+                    clock.tick(2)
                 elif des[0] == None:
                     des[0] = value
                     print("destroyer [1] is at " + str(value))
