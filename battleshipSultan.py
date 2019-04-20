@@ -1,3 +1,8 @@
+import pygame
+import Package_Battleship.text as txt
+import gameboard
+import Battle_menu
+
 class player():
     def __init__(self):
         # The type of game played and is set along with the ships at beginning of game (0 = classic, 1 = Salvo) 
@@ -69,7 +74,7 @@ class player():
 
     # Get the fireLoc from Tyler
     def inputFireLoc(self, fireInputs=[]):
-        for w in range(a.shots):
+        for w in range(self.shots):
             # This is a temp for the error/try catch stuff
             err = False
 
@@ -141,31 +146,31 @@ class player():
         # The count is to update the how many times the opponent can fire shots
         count = 0
         if(object.patHp[0] == 0):
-            for a in range(2):
+            for b in range(2):
                 self.trackingGrid[object.pat[b][0] - 96][object.pat[b][1]] = 2
                 object.primaryGrid[object.pat[b][0] - 96][object.pat[b][1]] = 2
                 count += 1
 
         if(object.desHp[0] == 0):
-            for a in range(3):
+            for b in range(3):
                 self.trackingGrid[object.des[b][0] - 96][object.des[b][1]] = 2
                 object.primaryGrid[object.des[b][0] - 96][object.des[b][1]] = 2
                 count += 1
 
         if(object.subHp[0] == 0):
-            for a in range(3):
+            for b in range(3):
                 self.trackingGrid[object.sub[b][0] - 96][object.sub[b][1]] = 2
                 object.primaryGrid[object.sub[b][0] - 96][object.sub[b][1]] = 2
                 count += 1
 
         if(object.batHp[0] == 0):
-            for a in range(4):
+            for b in range(4):
                 self.trackingGrid[object.bat[b][0] - 96][object.bat[b][1]] = 2
                 object.primaryGrid[object.bat[b][0] - 96][object.bat[b][1]] = 2
                 count += 1
 
         if(object.carHp[0] == 0):
-            for a in range(5):
+            for b in range(5):
                 self.trackingGrid[object.car[b][0] - 96][object.car[b][1]] = 2
                 object.primaryGrid[object.car[b][0] - 96][object.car[b][1]] = 2
                 count += 1
