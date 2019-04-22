@@ -1,3 +1,5 @@
+# BattleshipSultan.py is the logic component of the battleship project, made by Sultan fw7888
+
 import pygame
 import Package_Battleship.text as txt
 import gameboard
@@ -350,4 +352,3 @@ class player():
         else:
             self.shots = 5
             self.gameType = 1
-

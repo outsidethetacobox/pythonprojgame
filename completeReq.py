@@ -1,8 +1,8 @@
 # This file is fulfill the remaining requirements in this project.
+# Made by Sultan fw7888
+
 
 # Inheritance req:
-
-
 class drink:
     def __init__(self):
         self.name = ''
