@@ -2,7 +2,7 @@ import pygame
 import battleship_pac.text as txt
 import battleship_pac.Pause_Menu_2 as pause
 import battleship_pac.text as txt
-# import battleshipSultan
+import battleshipSultan
 # from Package_Battleship.gameover import gameover as gova REMOVE COMMENT
 # Gameboard coded by Tyler Gross Gl0132
 
@@ -251,7 +251,7 @@ def text_objects(text, font):
 
 
 def button_hover(button_x, button_w, button_y, button_h, disply, color, rect, text, hover_color,
-                 spot_num, hit_color, miss_color, action):
+                 spot_num, hit_color, miss_color, action, a = object):
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
 
@@ -266,6 +266,9 @@ def button_hover(button_x, button_w, button_y, button_h, disply, color, rect, te
             print(spot_num)
             print(txt.hits_list[spot_num])
             print(txt.hits_list.get('70'))
+
+            a.fireLoc([spot_num])
+
     elif txt.hits_list.get(spot_num) == '0':
         pygame.draw.rect(disply, miss_color, rect)
         Display.blit(text, rect)
@@ -287,8 +290,6 @@ def button_hover(button_x, button_w, button_y, button_h, disply, color, rect, te
         pygame.draw.rect(disply, color, rect)
         Display.blit(text, rect)
 
-
-
 def gameon():
     gaming = True
     txt.hits_list = {}
@@ -299,6 +300,7 @@ def gameon():
                 gaming = False
                 quit()
             # gova() REMOVE comment
+        
         textsurf, textrect = text_objects("comp output bar", F)
         textrect.center = (400, 600)
         Display.blit(textsurf, textrect)
@@ -308,8 +310,48 @@ def gameon():
         pygame.display.update()
         pygame.display.flip()
 
+
+def gameonClassic(gameMode = None):
+    gaming = True
+    firstTurn = True
+    turn = 0
+    txt.hits_list = {}
+    Display.fill(black)
+    while gaming:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                gaming = False
+                quit()
+            # gova() REMOVE comment
+        
+        # Initialize the game & create player one instance
+        if(firstTurn == True):
+            playerOne = battleshipSultan.player()
+            ship_placement(gameMode, playerOne)
+            
+            comp = battleshipSultan.player()
+            # KASHYAP FILL IN THE SHIP PLACEMENT for AI
+
+            firstTurn = False
+
+        textsurf, textrect = text_objects("comp output bar", F)
+        textrect.center = (400, 600)
+        Display.blit(textsurf, textrect)
+        for text, rect, color, hover, hit, miss, B_x, B_y, B_w, B_h, spot, action in buttons:
+            button_hover(B_x, B_h, B_y, B_w, Display, color, rect, text, hover, spot, hit, miss, action, playerOne)
+
+        if (turn == 0):
+            playerOne.fire(comp)
+            turn = 1
+        else:
+            # KASHYAP ENTERS THE AI STUFF HERE
+            turn = 0
+
+        pygame.display.update()
+        pygame.display.flip()
+
 # coded By Shawn
-def ship_placement(gameMode=None):
+def ship_placement(gameMode=None, a = object):
     # if game mode is classic, gameMode = 0
     # if salvo gameMode = 1
 
@@ -317,7 +359,7 @@ def ship_placement(gameMode=None):
     des = [None] * 3  # destroyer
     sub = [None] * 3  # submarine
     bat = [None] * 4  # battleship
-    car = [None] * 5
+    car = [None] * 5  # carrier
 
     gaming = True
     Display.fill(black)
@@ -337,7 +379,6 @@ def ship_placement(gameMode=None):
                     pat[0] = value
                     print("patrol [1] is at " + str(value))
                     clock.tick(2)
-
                 elif pat[1] == None:
                     pat[1] = value
                     print("patrol [2]  is at " + str(value))
@@ -408,8 +449,7 @@ def ship_placement(gameMode=None):
         pygame.display.update()
         pygame.display.flip()
 
-    a = battleshipSultan.player()
-
+    # Check THIS
     a.setShips(0, pat, des, sub, bat, car)
 
 
