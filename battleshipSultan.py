@@ -13,10 +13,111 @@ class player():
         self.shots = None
 
         # Shows where the player’s ships are and where the opponent has fired shots at
-        self.primaryGrid = [[None] * 10] * 10
+        self.primaryGrid = {
+            '1': None,
+            '2': None,
+            '3': None,
+            '4': None,
+            '5': None,
+            '6': None,
+            '7': None,
+            '8': None,
+            '9': None,
+            '10': None,
+            '11': None,
+            '12': None,
+            '13': None,
+            '14': None,
+            '15': None,
+            '16': None,
+            '17': None,
+            '18': None,
+            '19': None,
+            '20': None,
+            '21': None,
+            '22': None,
+            '23': None,
+            '24': None,
+            '25': None,
+            '26': None,
+            '27': None,
+            '28': None,
+            '29': None,
+            '30': None,
+            '31': None,
+            '32': None,
+            '33': None,
+            '34': None,
+            '35': None,
+            '36': None,
+            '37': None,
+            '38': None,
+            '39': None,
+            '40': None,
+            '41': None,
+            '42': None,
+            '43': None,
+            '44': None,
+            '45': None,
+            '46': None,
+            '47': None,
+            '48': None,
+            '49': None,
+            '50': None,
+            '51': None,
+            '52': None,
+            '53': None,
+            '54': None,
+            '55': None,
+            '56': None,
+            '57': None,
+            '58': None,
+            '59': None,
+            '60': None,
+            '61': None,
+            '62': None,
+            '63': None,
+            '64': None,
+            '65': None,
+            '66': None,
+            '67': None,
+            '68': None,
+            '69': None,
+            '70': None,
+            '71': None,
+            '72': None,
+            '73': None,
+            '74': None,
+            '75': None,
+            '76': None,
+            '77': None,
+            '78': None,
+            '79': None,
+            '80': None,
+            '81': None,
+            '82': None,
+            '83': None,
+            '84': None,
+            '85': None,
+            '86': None,
+            '87': None,
+            '88': None,
+            '89': None,
+            '90': None,
+            '91': None,
+            '92': None,
+            '93': None,
+            '94': None,
+            '95': None,
+            '96': None,
+            '97': None,
+            '98': None,
+            '99': None,
+            '100': None,
+            'p': 'p'}
 
         # Shows where the player has fired shots at
-        self.trackingGrid = [[None] * 10] * 10
+        self.trackingGrid = self.primaryGrid.copy()
 
         # Where the player's ships are
         self.pat = [[None] * 2] * 2
@@ -46,10 +147,10 @@ class player():
                 x = n
                 y = 1
             else:
-                x = int(n / 10)
-                y = n % 10
-                if (y == 0):
-                    y = 10
+                y = int(n / 10)
+                x = n % 10
+                if (x == 0):
+                    x = 10
             return x, y
         elif (2 <= len(s) <= 3):
             if (len(s) == 3):
@@ -73,9 +174,18 @@ class player():
             pass
         # print("Invalid input. Try again.")
 
+    # Turn X,Y coordinates into string
+    def getString(self, x, y):
+        if (y == '1'):
+            s = x
+        elif (x == '10'):
+            s = y + '0'
+        else:
+            s = y + x
+        return s
 
     # Get the fireLoc from Tyler
-    def inputFireLoc(self, fireInputs=[]):
+    def inputFireLoc(self, fireInputs = []):
         for w in range(self.shots):
             # This is a temp for the error/try catch stuff
             err = False
@@ -85,6 +195,7 @@ class player():
             self.fireLoc[w] = [x,y]
 
     def fire(self, object):
+        hit = 0
         for a in range(self.shots):
             # To check if a shot has been fired
             shotFired = False
@@ -92,7 +203,7 @@ class player():
             # Check if patrol boat still alive
             if(object.patHp[0] != 0):
                 for b in range(2):
-                    if(object.patHp[b + 1] != 0 and object.pat[b] == self.firLoc[a]):
+                    if(object.patHp[b + 1] != 0 and object.pat[b] == self.fireLoc[a]):
                         object.patHp[b + 1] = 0
                         object.patHp[0] -= 1
                         shotFired = True
@@ -101,7 +212,7 @@ class player():
             # Check if destroyer still alive & no shot was fired
             if(object.desHp[0] != 0 and shotFired == False):
                 for b in range(3):
-                    if(object.desHp[b + 1] != 0 and object.des[b] == self.firLoc[a]):
+                    if(object.desHp[b + 1] != 0 and object.des[b] == self.fireLoc[a]):
                         object.desHp[b + 1] = 0
                         object.desHp[0] -= 1
                         shotFired = True
@@ -110,7 +221,7 @@ class player():
             # Check if submarine still alive & no shot was fired
             if(object.subHp[0] != 0 and shotFired == False):
                 for b in range(3):
-                    if(object.subHp[b + 1] != 0 and object.sub[b] == self.firLoc[a]):
+                    if(object.subHp[b + 1] != 0 and object.sub[b] == self.fireLoc[a]):
                         object.subHp[b + 1] = 0
                         object.subHp[0] -= 1
                         shotFired = True
@@ -119,7 +230,7 @@ class player():
             # Check if battleship still alive & no shot was fired
             if(object.batHp[0] != 0 and shotFired == False):
                 for b in range(4):
-                    if(object.batHp[b + 1] != 0 and object.bat[b] == self.firLoc[a]):
+                    if(object.batHp[b + 1] != 0 and object.bat[b] == self.fireLoc[a]):
                         object.batHp[b + 1] = 0
                         object.batHp[0] -= 1
                         shotFired = True
@@ -128,20 +239,28 @@ class player():
             # Check if carrier still alive & no shot was fired
             if(object.carHp[0] != 0 and shotFired == False):
                 for b in range(5):
-                    if(object.carHp[b + 1] != 0 and object.car[b] == self.firLoc[a]):
+                    if(object.carHp[b + 1] != 0 and object.car[b] == self.fireLoc[a]):
                         object.carHp[b + 1] = 0
                         object.carHp[0] -= 1
                         shotFired = True
                         break
 
+            x = str(self.fireLoc[a][0])
+            y = str(self.fireLoc[a][1])
+            s = self.getString(x,y)
             # Update tracking grid at fireLoc to 1 for hit and 0 for miss
             if(shotFired == True):
-                self.trackingGrid[self.fireLoc[a][0]][self.fireLoc[a][1]] = 1
-                object.primaryGrid[self.fireLoc[a][0]][self.fireLoc[a][1]] = 1
+                self.trackingGrid[s] = 1
+                object.primaryGrid[s] = 1
                 self.isSunk(object)
+                hit = 1
             else:
-                self.trackingGrid[self.fireLoc[a][0]][self.fireLoc[a][1]] = 0
-                object.primaryGrid[self.fireLoc[a][0]][self.fireLoc[a][1]] = 0
+                self.trackingGrid[s] = 0
+                object.primaryGrid[s] = 0
+        if (hit != 0):
+            return 1
+        else:
+            return 0       
 
     # Update player's tracking grid of what opponent ships have been sunk and the opponent's primary grid
     def isSunk(self, object):
@@ -149,33 +268,49 @@ class player():
         count = 0
         if(object.patHp[0] == 0):
             for b in range(2):
-                self.trackingGrid[object.pat[b][0] - 96][object.pat[b][1]] = 2
-                object.primaryGrid[object.pat[b][0] - 96][object.pat[b][1]] = 2
-                count += 1
+                x = str(object.pat[b][0])
+                y = str(object.pat[b][1])
+                s = self.getString(x,y)
+                self.trackingGrid[s] = 2
+                object.primaryGrid[s] = 2
+            count += 1
 
         if(object.desHp[0] == 0):
             for b in range(3):
-                self.trackingGrid[object.des[b][0] - 96][object.des[b][1]] = 2
-                object.primaryGrid[object.des[b][0] - 96][object.des[b][1]] = 2
-                count += 1
+                x = str(object.des[b][0])
+                y = str(object.des[b][1])
+                s = self.getString(x,y)
+                self.trackingGrid[s] = 2
+                object.primaryGrid[s] = 2
+            count += 1
+                
 
         if(object.subHp[0] == 0):
             for b in range(3):
-                self.trackingGrid[object.sub[b][0] - 96][object.sub[b][1]] = 2
-                object.primaryGrid[object.sub[b][0] - 96][object.sub[b][1]] = 2
-                count += 1
+                x = str(object.sub[b][0])
+                y = str(object.sub[b][1])
+                s = self.getString(x,y)
+                self.trackingGrid[s] = 2
+                object.primaryGrid[s] = 2
+            count += 1
 
         if(object.batHp[0] == 0):
             for b in range(4):
-                self.trackingGrid[object.bat[b][0] - 96][object.bat[b][1]] = 2
-                object.primaryGrid[object.bat[b][0] - 96][object.bat[b][1]] = 2
-                count += 1
+                x = str(object.bat[b][0])
+                y = str(object.bat[b][1])
+                s = self.getString(x,y)
+                self.trackingGrid[s] = 2
+                object.primaryGrid[s] = 2
+            count += 1
 
         if(object.carHp[0] == 0):
             for b in range(5):
-                self.trackingGrid[object.car[b][0] - 96][object.car[b][1]] = 2
-                object.primaryGrid[object.car[b][0] - 96][object.car[b][1]] = 2
-                count += 1
+                x = str(object.car[b][0])
+                y = str(object.car[b][1])
+                s = self.getString(x,y)
+                self.trackingGrid[s] = 2
+                object.primaryGrid[s] = 2
+            count += 1
         
         if (self.gameType == 1):
             object.shots = 5 - count
