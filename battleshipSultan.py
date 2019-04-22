@@ -190,10 +190,7 @@ class player():
     # Get the fireLoc from Tyler
     def inputFireLoc(self, fireInputs = []):
         for w in range(self.shots):
-            # This is a temp for the error/try catch stuff
-            err = False
-
-            # string to XY int       
+            # string to XY int
             x,y = self.translate(fireInputs[w])
             self.fireLoc[w] = [x,y]
 
