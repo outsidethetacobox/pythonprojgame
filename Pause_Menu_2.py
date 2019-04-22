@@ -1,7 +1,7 @@
 import pygame
 import time
 import random
-import Package_Battleship
+from battleship_pac.Battle_menu import *
 pygame.init()
 
 # defining display size
@@ -23,9 +23,9 @@ ship_width = 73
 # defining a standard small text size for program
 small_text = pygame.font.Font("freesansbold.ttf", 20)
 # defining pause background image
-background_image = pygame.image.load('pause_background.jpg')
+background_image = pygame.image.load('pics/pause_background.jpg')
 # GLOBAL VARIABLES
-pause = False
+
 
 # creating the menu display
 gameDisplay = pygame.display.set_mode((display_width, display_height))
@@ -33,9 +33,11 @@ pygame.display.set_caption('Battleship')
 clock = pygame.time.Clock()
 
 # creating variable that loads a ship image
-shipImg = pygame.image.load('battleship_sprite_test_Dilshawn_Sahi.png')
+# shipImg = pygame.image.load('battleship_sprite_test_Dilshawn_Sahi.png')
 
 # function for labeling buttons
+
+
 def text_objects(text, font):
     textSurface = font.render(text, True, black,)
     return textSurface, textSurface.get_rect()
@@ -52,7 +54,9 @@ def button(msg, x, y, w, h, in_color, a_color, action):
     if x + w > mouse[0] > x and y + h > mouse[1] > y:
         pygame.draw.rect(gameDisplay, a_color, (x, y, w, h))
 
-        if click[0] == 1:
+        if click[0] == 1 and action == 'quit':
+            menu_screen()
+        elif click[0] == 1 and action != 'quit':
             action()
 
     else:
@@ -77,7 +81,7 @@ def pause_menu():
                 quit()
 
         gameDisplay.fill(white)
-        gameDisplay.blit(background_image, [0,0])
+        gameDisplay.blit(background_image, [0, 0])
         largeText = pygame.font.Font('freesansbold.ttf', 95)  # was 115
         smallText = pygame.font.Font('freesansbold.ttf', 30)
         TextSurf, TextRect = text_objects("Paused", largeText)
@@ -91,13 +95,11 @@ def pause_menu():
         # Declaring Buttons
         # change continue action to resume battleship
         button("Continue", 150, 450, 100, 50, dark_green, green, quit)
-        button("Quit", 550, 450, 100, 50, dark_red, red, quit)
+        button("Quit", 550, 450, 100, 50, dark_red, red, 'quit')
 
         pygame.display.update()
         clock.tick(15)
 
 
 pause = True
-pause_menu()
-pygame.quit()
-quit()
+
