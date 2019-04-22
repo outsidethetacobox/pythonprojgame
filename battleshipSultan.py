@@ -137,42 +137,43 @@ class player():
         self.fireLoc = [[None] * 2] * 5
 
     def translate(self, s):
-        s = s.strip()
-        s = s.lower()
-
-        # If the input string is a number 1 to 100
-        n = int(s)
-        if (1 <= n <= 100):        
-            if(n <= 10):
-                x = n
-                y = 1
-            else:
-                y = int(n / 10)
-                x = n % 10
-                if (x == 0):
-                    x = 10
-            return x, y
-        elif (2 <= len(s) <= 3):
-            if (len(s) == 3):
-                y = int(s[1]+s[2])
-            else:
-                y = int(s[1])
-
-            if (1 <= y <= 10):
-                x = ord(s[0])
-                if (97 <= x <= 106):
-                    return x, y
+        # This is the error/try catch for string
+        try:
+            s = s.strip()
+            s = s.lower()
+            
+            # If the input string is a number 1 to 100
+            n = int(s)
+            if (1 <= n <= 100):        
+                if(n <= 10):
+                    x = n
+                    y = 1
                 else:
-                 err = True
-            else:
-                err = True
-        else:
-            err = True
+                    y = int(n / 10)
+                    x = n % 10
+                    if (x == 0):
+                        x = 10
+                return x, y
+            # If the input string is A-J 1-10 (no space betweeen letter and number)
+            elif (2 <= len(s) <= 3):
+                if (len(s) == 3):
+                    y = int(s[1]+s[2])
+                else:
+                    y = int(s[1])
 
-        # This is the error/try catch stuff, finish it later
-        if (err == True):
-            pass
-        # print("Invalid input. Try again.")
+                if (1 <= y <= 10):
+                    x = ord(s[0]) - 96
+                    if (97 <= x <= 106):
+                        return x, y
+                    else:
+                        raise ValueError
+                else:
+                    raise ValueError
+            else:
+                raise ValueError
+        except ValueError:
+            print("Invalid string value. Try again.")
+        
 
     # Turn X,Y coordinates into string
     def getString(self, x, y):
@@ -200,7 +201,7 @@ class player():
             # To check if a shot has been fired
             shotFired = False
 
-            # Check if patrol boat still alive
+            # Check if patrol boat still alive & no shot was fired
             if(object.patHp[0] != 0):
                 for b in range(2):
                     if(object.patHp[b + 1] != 0 and object.pat[b] == self.fireLoc[a]):
@@ -349,3 +350,4 @@ class player():
         else:
             self.shots = 5
             self.gameType = 1
+

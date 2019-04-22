@@ -1,5 +1,7 @@
 import pygame
-import pybattleship.text as txt
+import battleship_pac.text as txt
+import battleship_pac.Pause_Menu_2 as pause
+import battleship_pac.text as txt
 # import battleshipSultan
 # from Package_Battleship.gameover import gameover as gova REMOVE COMMENT
 # Gameboard coded by Tyler Gross Gl0132
@@ -12,6 +14,7 @@ violet_blue = 138, 43, 226
 red = 255, 0, 0
 dar_red = 139, 0, 0
 green = 0, 128, 0
+grey = 128, 128, 128
 clock = pygame.time.Clock()
 Display = pygame.display.set_mode((800, 700))
 F = pygame.font.SysFont("Times New Norman", 24)
@@ -116,6 +119,7 @@ ntyseven_button = pygame.Rect(440, 425, 60, 40)
 ntyeight_button = pygame.Rect(505, 425, 60, 40)
 ntynine_button = pygame.Rect(570, 425, 60, 40)
 onehunny_button = pygame.Rect(635, 425, 60, 40)
+pause_button = pygame.Rect(700, 600, 60, 40)
 
 
 acton = 3
@@ -220,7 +224,8 @@ buttons = [
     [txt.ninseven, ntyseven_button, blue, violet_blue, green, red, 440, 425, 60, 40, '97', txt.hits_list],
     [txt.nineight, ntyeight_button, blue, violet_blue, green, red, 505, 425, 60, 40, '98', txt.hits_list],
     [txt.ninnine, ntynine_button, blue, violet_blue, green, red, 570, 425, 60, 40, '99', txt.hits_list],
-    [txt.hunny, onehunny_button, blue, violet_blue, green, red, 635, 425, 60, 40, '100', acton],
+    [txt.hunny, onehunny_button, blue, violet_blue, green, red, 635, 425, 60, 40, '100', txt.hits_list],
+    [txt.pause, pause_button, red, blue, red, red, 750, 605, 60, 40, 'p', txt.hits_list]
 
 ]
 
@@ -250,32 +255,34 @@ def button_hover(button_x, button_w, button_y, button_h, disply, color, rect, te
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
 
-    if button_x + button_w > mouse[0] > button_x and button_y + (button_h / 2) > mouse[1] > button_y:
+    if button_x + button_w > mouse[0] > button_x and button_y + (button_h / 2) > mouse[1] > button_y\
+            and txt.hits_list.get(spot_num) is None:
         pygame.draw.rect(disply, hover_color, rect)
         Display.blit(text, rect)
         if click[0] == 1:
             pygame.time.wait(200)
 
-            txt.hits_list.update({spot_num: '1'})
+            txt.hits_list.update({spot_num: '0'})
             print(spot_num)
             print(txt.hits_list[spot_num])
             print(txt.hits_list.get('70'))
+    elif txt.hits_list.get(spot_num) == '0':
+        pygame.draw.rect(disply, miss_color, rect)
+        Display.blit(text, rect)
     elif txt.hits_list.get(spot_num) == '1':
         pygame.draw.rect(disply, hit_color, rect)
         Display.blit(text, rect)
-
-
-
-            # firefucntion(spot)
-            # if fire returns 1
-            # hover_color = hit_color
-            # color = hit_color
-            # if fire returns 2
-            # hover_color = grey
-            # color = grey
-            # if returns 0
-            # hover_color = miss_color
-
+    elif txt.hits_list.get(spot_num) == '2':
+        pygame.draw.rect(disply, grey, rect)
+        Display.blit(text, rect)
+    elif button_x + button_w > mouse[0] > button_x and button_y + (button_h / 2) > mouse[1] > button_y\
+            and txt.hits_list.get(spot_num) is 'p':
+        pygame.draw.rect(disply, hover_color, rect)
+        Display.blit(text, rect)
+        if click[0] == 1:
+            pygame.time.wait(200)
+            print(spot_num)
+            pause.pause_menu()
     else:
         pygame.draw.rect(disply, color, rect)
         Display.blit(text, rect)
@@ -290,6 +297,7 @@ def gameon():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gaming = False
+                quit()
             # gova() REMOVE comment
         textsurf, textrect = text_objects("comp output bar", F)
         textrect.center = (400, 600)
@@ -407,7 +415,7 @@ def ship_placement(gameMode=None):
 
 # REMOVE THIS WHEN DONE TESTING
 # ship_placement()
-gameon()
+
 """
 patrol = 2
 destroyer = 3
