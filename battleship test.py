@@ -49,10 +49,10 @@ def random_col(attackCpuBoard):
 
 # cpu picks random row for ship
 def cpu_random_row(unseenboard):
-    return randint(0, len(unseenboard) - 1)
+    return randint(1, len(10))
 # cpu picks random col for ship
 def cpu_random_col(unseenboard):
-    return randint(0, len(unseenboard[0]) - 1)
+    return randint(1, len(10))
 
 #=====================================================================================
 #=====================================================================================
@@ -95,32 +95,40 @@ while turn < 10:
     #=====================================================================================
     #=====================================================================================
     # use from here onwards
+    # each test is a different location to attack
                       
     # CPU TURN
-    #cpu_guess_row = cpu_random_row(unseenboard)
-    #cpu_guess_col = cpu_random_col(unseenboard)
-    cpu_guess_row = 2
-    cpu_guess_col = 2
+    cpu_guess_row = cpu_random_row(unseenboard)
+    cpu_guess_col = cpu_random_col(unseenboard)
+    #cpu_guess_row = 2
+    #cpu_guess_col = 2
     print("cpu guessed row: ", cpu_guess_row)
     print("cpu guessed col: ", cpu_guess_col)
+    # if hit == true then smart attack will start
+    # all test statements do the same thing but attack a different location
     if (hit == True):
         if (test == 1):
+            # next turn user will get the remembered values and attack nearby
             temp = remember_row - 1
             if temp == user_set_row and remember_col == user_set_col:
                 print("the cpu has hit a ship")
                 print("tes1 hit")
                 print("tmp = ", temp)
                 print("rem_col = ", remember_col)
+                # if hit then remember this as new location
                 remember_row = temp
                 remember_col = remember_col
                 test = 1
             else:
+                # if nearby value is out of area
                 if (temp < 0 or temp > 4):
                     print("this number is not in the ocean")
+                    # if not hit check next nearby location
                     test = 2
                     print("tes1 out")
                     print("tmp = ", temp)
                     print("rem_col = ", remember_col)
+                    # check if new location is already hit
                 elif (unseenboard[temp][remember_col] == "X"):
                     print("cpu has already guessed that")
                     test = 2
@@ -128,12 +136,14 @@ while turn < 10:
                     print("tmp = ", temp)
                     print("rem_col = ", remember_col)   
                 else:
+                    # missed ship and mark as hit
                     print("missed battleship")
                     unseenboard[temp][remember_col] = "X"
                     test = 2
                     print("tes1 miss")
                     print("tmp = ", temp)
                     print("rem_col = ", remember_col)
+        # if not hit at test 1 then attack test 2 next turn
         elif (test == 2):
             temp = remember_row + 1
             if temp == user_set_row and remember_col == user_set_col:
@@ -226,22 +236,30 @@ while turn < 10:
                     print("tmp = ", temp)
         
     else:
-        if cpu_guess_row == user_set_row and cpu_guess_col == user_set_col:
+        # check if the cpu guesses correctly
+        if cpu_guess_row == (object.pat and cpu_guess_col == user_set_col:
             print("The cpu has hit your battleship!")
+            # remember these rows and columms to attack smart
             remember_row = cpu_guess_row
             remember_col = cpu_guess_col
+            # ship has been hit so turn on smart mode
             hit = True
+            # go to what the cpu should attack next
             test = 1
         else:
+            # if this spot has already been attacked
             if (unseenboard[cpu_guess_row][cpu_guess_col] == "X"):
                 print("The cpu has already guessed that")
+                # keep attacking randomly so smart mode off
                 hit = False
                 test = 1
             else:
+                # missed battlehip but mark this spot as attacked
                 print("The cpu has missed your battleship")
                 unseenboard[cpu_guess_row][cpu_guess_col] = "X"
                 hit = False
                 test = 1
+                #print board
             cpu_attack_board(unseenboard)
     turn = turn + 1
     
