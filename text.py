@@ -1,5 +1,5 @@
 import pygame
-
+#Coded By Tyler Gross gl0132
 black = 0, 0, 0
 pygame.init()
 F = pygame.font.SysFont("Times New Norman", 24)
@@ -104,65 +104,189 @@ ninseven = F.render("97", True, black)
 nineight = F.render("98", True, black)
 ninnine = F.render("99", True, black)
 hunny = F.render("100", True, black)
-
+pause = F.render("Pause", True, black)
 
 
 def send_text(text):
     return text
 
+
+hits_list = {
+    '1': None,
+    '2': None,
+    '3': None,
+    '4': None,
+    '5': None,
+    '6': None,
+    '7': None,
+    '8': None,
+    '9': None,
+    '10': None,
+    '11': None,
+    '12': None,
+    '13': None,
+    '14': None,
+    '15': None,
+    '16': None,
+    '17': None,
+    '18': None,
+    '19': None,
+    '20': None,
+    '21': None,
+    '22': None,
+    '23': None,
+    '24': None,
+    '25': None,
+    '26': None,
+    '27': None,
+    '28': None,
+    '29': None,
+    '30': None,
+    '31': None,
+    '32': None,
+    '33': None,
+    '34': None,
+    '35': None,
+    '36': None,
+    '37': None,
+    '38': None,
+    '39': None,
+    '40': None,
+    '41': None,
+    '42': None,
+    '43': None,
+    '44': None,
+    '45': None,
+    '46': None,
+    '47': None,
+    '48': None,
+    '49': None,
+    '50': None,
+    '51': None,
+    '52': None,
+    '53': None,
+    '54': None,
+    '55': None,
+    '56': None,
+    '57': None,
+    '58': None,
+    '59': None,
+    '60': None,
+    '61': None,
+    '62': None,
+    '63': None,
+    '64': None,
+    '65': None,
+    '66': None,
+    '67': None,
+    '68': None,
+    '69': None,
+    '70': None,
+    '71': None,
+    '72': None,
+    '73': None,
+    '74': None,
+    '75': None,
+    '76': None,
+    '77': None,
+    '78': None,
+    '79': None,
+    '80': None,
+    '81': None,
+    '82': None,
+    '83': None,
+    '84': None,
+    '85': None,
+    '86': None,
+    '87': None,
+    '88': None,
+    '89': None,
+    '90': None,
+    '91': None,
+    '92': None,
+    '93': None,
+    '94': None,
+    '95': None,
+    '96': None,
+    '97': None,
+    '98': None,
+    '99': None,
+    '100': None,
+    'p': 'p'
+}
+
+
 class ships:
-    battleship = {1:"", 2:"", 3:"", 4:""}
-    carrier = {1:"", 2:"", 3:"", 4:"", 5:""}
-    submarine = {1:"", 2:"", 3:""}
-    destroyer = {1:"", 2:""}
-    crusier  = {1:"", 2:"", 3:""}
+    battleship = {0: None, 1: None, 2: None, 3: None}
+    carrier = {0: None, 1: None, 2: None, 3: None, 4: None}
+    submarine = {0: None, 1: None, 2: None}
+    destroyer = {0: None, 1: None}
+    crusier  = {0: None, 1: None, 2: None}
 
     def __init__(self):
         self.battleship[1] = ""
 
     def load_battleship(self, text):
-        if self.battleship[0: ""]:
-            self.battleship[0:text]
-        elif self.battleship[1:""]:
-            self.battleship[1:text]
-        elif self.battleship[2:""]:
-            self.battleship[2:text]
-        elif self.battleship[3:""]:
-            self.battleship[3:text]
+        if self.battleship[0] is not None:
+            if self.battleship[0: None]:
+                self.battleship[0:text]
+            elif self.battleship[1:""]:
+                self.battleship[1:text]
+            elif self.battleship[2:""]:
+                self.battleship[2:text]
+            elif self.battleship[3:""]:
+                self.battleship[3:text]
+        else:
+            return True
+
 
     def load_carrier(self, text):
-        if self.carrier[0: ""]:
-            self.carrier[0:text]
-        elif self.carrier[1:""]:
-            self.carrier[1:text]
-        elif self.carrier[2:""]:
-            self.carrier[2:text]
-        elif self.carrier[3:""]:
-            self.carrier[3:text]
-        elif self.carrier[4:""]:
-            self.carrier[4:text]
+        if self.carrier[0] is not None:
+            if self.carrier[0: ""]:
+                self.carrier[0:text]
+            elif self.carrier[1:""]:
+                self.carrier[1:text]
+            elif self.carrier[2:""]:
+                self.carrier[2:text]
+            elif self.carrier[3:""]:
+                self.carrier[3:text]
+            elif self.carrier[4:""]:
+                self.carrier[4:text]
+        else:
+            return True
+
 
     def load_crusier(self, text):
-        if self.crusier[0: ""]:
-            self.crusier[0:text]
-        elif self.crusier[1:""]:
-            self.crusier[1:text]
-        elif self.crusier[2:""]:
-            self.crusier[2:text]
+        if self.carrier[0] is not None:
+            if self.crusier[0: ""]:
+                self.crusier[0:text]
+            elif self.crusier[1:""]:
+                self.crusier[1:text]
+            elif self.crusier[2:""]:
+                self.crusier[2:text]
+        else:
+            return True
+
 
     def load_submarine(self, text):
-        if self.submarine[0: ""]:
-            self.submarine[0:text]
-        elif self.submarine[1:""]:
-            self.submarine[1:text]
-        elif self.submarine[2:""]:
-            self.submarine[2:text]
+        if self.submarine[0] is not None:
+            if self.submarine[0: ""]:
+                self.submarine[0:text]
+            elif self.submarine[1:""]:
+                self.submarine[1:text]
+            elif self.submarine[2:""]:
+                self.submarine[2:text]
+        else:
+            return True
 
     def load_destroyer(self, text):
-        if self.destroyer[0: ""]:
-            self.destroyer[0:text]
-        elif self.destroyer[1:""]:
-            self.destroyer[1:text]
+        if self.destroyer[0] is not None:
+            if self.destroyer[0: ""]:
+                self.destroyer[0:text]
+            elif self.destroyer[1:""]:
+                self.destroyer[1:text]
+        else:
+            return True
 
 
     def checkcollision(self, spot):
@@ -182,4 +306,6 @@ class ships:
             if self.crusier[x] == spot:
                 return True
         return False
+
+
 
