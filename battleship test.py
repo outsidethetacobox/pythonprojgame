@@ -262,7 +262,92 @@ while turn < 10:
                 #print board
             cpu_attack_board(unseenboard)
     turn = turn + 1
-    
+
+
+
+
+#===========================================================================
+#===========================================================================
+def cpu_ship_placement(gameMode=None, a=object):
+    # if game mode is classic, gameMode = 0
+    # if salvo gameMode = 1
+    arr = [False] * 100
+
+    comp = battleshipSultan.player()
+
+    cpupat = [None] * 2  # patrol
+    cpudes = [None] * 3  # destroyer
+    cpusub = [None] * 3  # submarine
+    cpubat = [None] * 4  # battleship
+    cpucar = [None] * 5  # carrier
+
+    gaming = True
+    Display.fill(black)
+    while gaming:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                gaming = False
+            # gova() REMOVE comment
+        textsurf, textrect = text_objects("comp output bar", F)
+        textrect.center = (400, 600)
+        Display.blit(textsurf, textrect)
+
+        #for text, rect, color, hover, hit, miss, B_x, B_y, B_w, B_h, spot in buttons:
+        value = set_cpu_ship()
+        temp = value + 1
+        cpupat[0] = 2
+        #print("patrol [1] is at " + str(value))
+        cpupat[1] = 3
+        #print("patrol [2]  is at " + str(value))
+
+        cpudes[0] = 16
+        #print("destroyer [1] is at " + str(value))
+        cpudes[1] = 17
+        #print("destroyer [2] is at " + str(value))
+        cpudes[2] = 18
+        #print("destroyer [3] is at " + str(value))
+
+        cpusub[0] = 31
+        #print("submarine [1] is at " + str(value))
+        cpusub[1] = 32
+        #print("submarine [2] is at " + str(value))
+        cpusub[2] = 33
+        #print("submarine [3] is at " + str(value))
+
+        cpubat[0] = 55
+        #print("battleship [1] is at " + str(value))
+        cpubat[1] = 56
+        #print("battleship [2] is at " + str(value))
+        cpubat[2] = 57
+        #print("battleship [3] is at " + str(value))
+        cpubat[3] = 58
+        #print("battleship [4] is at " + str(value))
+
+        cpucar[0] = 86
+        #print("carrier [1] is at " + str(value))
+        cpucar[1] = 87
+        #print("carrier [2] is at " + str(value))
+        cpucar[2] = 88
+        #print("carrier [3] is at " + str(value))
+        cpucar[3] = 89
+        #print("carrier [4] is at " + str(value))
+        cpucar[4] = 90
+        #print("carrier [5] is at " + str(value))
+
+
+        pygame.display.update()
+        pygame.display.flip()
+
+    # Check THIS
+    a.setShips(0, pat, des, sub, bat, car)
+
+
+# REMOVE THIS WHEN DONE TESTING
+# ship_placement()
+
+# =================================================================================================================================
+# =================================================================================================================================
+
     
             
         
