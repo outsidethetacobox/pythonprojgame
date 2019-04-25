@@ -1,7 +1,7 @@
 # BattleshipSultan.py is the logic component of the battleship project, made by Sultan fw7888
 
 import pygame
-import Package_Battleship.text as txt
+import battleship_pac.text as txt
 import gameboard
 import Battle_menu
 import completeReq
